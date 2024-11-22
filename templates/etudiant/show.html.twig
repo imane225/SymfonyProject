@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Détails de l'étudiant{% endblock %}
+
+{% block body %}
+<h1>Détails de l'étudiant</h1>
+
+<p>ID : {{ etudiant.id }}</p>
+<p>Nom : {{ etudiant.nom }}</p>
+<p>Prénom : {{ etudiant.prenom }}</p>
+<p>Note : {{ etudiant.note }}</p>
+
+<a href="{{ path('etudiant_index') }}">Retour à la liste</a>
+<a href="{{ path('etudiant_edit', {'id': etudiant.id}) }}">Modifier</a>
+
+<form method="post" action="{{ path('etudiant_delete', {'id': etudiant.id}) }}" onsubmit="return confirm('Voulez-vous  supprimer l'étudiant ?');">
+    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ etudiant.id) }}">
+    <button class="btn">Supprimer</button>
+</form>
+{% endblock %}
